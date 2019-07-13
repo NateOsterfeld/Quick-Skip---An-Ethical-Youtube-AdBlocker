@@ -1,2 +1,2 @@
 # Quick-Skip---An-Ethical-Youtube-AdBlocker
-Light weight, secure, ethical, and easy to use, Quick Skip lets you block ads while still supporting creators. With two main modal functions, it is now possible to block ads altogether or simply skip them as normal, but without ever laying down a finger.
+Light weight, secure, ethical, AND easy to use, Quick Skip lets you block ads while still supporting creators. With two main modal functions, it is now possible to block ads altogether or simply let Quick Skip detect the skip button and play the video instantly thereafter, this way being able to support your favorite creators without ever lifting a finger! 
