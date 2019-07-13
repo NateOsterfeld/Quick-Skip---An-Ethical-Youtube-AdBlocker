@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Quick Skip - Youtube AdBlocker</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto" type="text/css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+        html,
+        body {
+            font-family: 'Roboto';
+            font-size: 14px;
+            margin: 0;
+            min-height: 180px;
+            padding: 0;
+            width: 276px;
+        }
+
+        h1 {
+            font-family: 'Roboto';
+            font-size: 22px;
+            font-weight: 700;
+            margin: 0;
+            color: #BA0000;
+        }
+
+        a:link,
+        a:visited {
+            outline: 0;
+            text-decoration: none;
+        }
+
+        img {
+            width: 30px;
+            ;
+        }
+
+        .modal-content {
+            display: flex;
+            height: 28px;
+            justify-content: space-around;
+        }
+
+        .modal-icons {
+            display: flex;
+            justify-content: space-between;
+            height: 50px;
+            width: 100%;
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 3px solid #BA0000;
+        }
+
+        .logo {
+            display: flex;
+            font-size: 40px;
+            padding-bottom: 5px;
+            padding-top: 16px;
+            justify-content: space-evenly;
+            align-items: center;
+            cursor: default;
+        }
+
+
+        .logo-icon {
+            width: 15%;
+            height: auto;
+            vertical-align: text-bottom;
+        }
+
+        .flex-container {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 22px;
+        }
+
+        .flex {
+            opacity: .5;
+            width: 120px;
+            transition: opacity 0.2s ease-in-out;
+            display: flex;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .flex:hover {
+            opacity: 1;
+        }
+
+        .flex .fa {
+            font-size: 40px;
+            color: #ff0000;
+        }
+
+        .auto {
+            display: flex;
+            cursor: pointer;
+            margin-left: 30px;
+            border: 2px solid #ff0000;
+            margin-right: 5px;
+            border-radius: 50px;
+            transition: all .5s ease-out;
+        }
+
+        .auto span {
+            align-self: center;
+            height: 100%;
+        }
+
+        .auto.active > i {
+            color: white;
+        }
+
+        .block {
+            display: flex;
+            cursor: pointer;
+            margin-right: 30px;
+            border: 2px solid #ff0000;
+            margin-left: 5px;
+            border-radius: 50px;
+            transition: all .5s ease-out;
+        }
+
+        .block i {
+            align-self: center;
+        }
+
+        .auto-icon {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            color: black;
+            border: 2px solid #ff0000;
+            align-items: center;
+            border-top-left-radius: 10px;
+            cursor: pointer;
+            transition: all .5s ease-out;
+            border-right: none;
+        }
+
+        .auto.hover {
+            background-color: rgb(255, 0, 0, .5);
+        }
+
+        .auto.hover > .auto-icon-text {
+            color: white;
+        }
+
+        .auto-icon:hover {
+            background-color: rgb(255, 0, 0, .5);
+        }
+
+        .auto:hover ~ .auto-icon {
+            background-color: rgb(255, 0, 0, .5);
+            color: white;
+        }
+
+        .auto-icon:hover>.auto-select {
+            color: white;
+        }
+
+        .auto-icon:active {
+            background-color: #ff0000;
+        }
+
+        .active {
+            background-color: #ff0000;
+        }
+
+        .auto-icon.active > .auto-select {
+            color: white;
+        }
+
+        .block-icon {
+            display: flex;
+            border: 2px solid #ff0000;
+            width: 100%;
+            color: black;
+            justify-content: center;
+            align-items: center;
+            border-top-right-radius: 10px;
+            cursor: pointer;
+            transition: all .5s ease-out;
+            border-left: none;
+        }
+
+        .block.hover {
+            background-color: rgb(255, 0, 0, .5);
+        }
+
+        .block.hover > .block-icon-text {
+            color: white;
+        }
+
+        .block-icon:hover {
+            background-color: rgb(255, 0, 0, .5);
+        }
+
+        .block:hover ~ .block-icon {
+            background-color: rgb(255, 0, 0, .5);
+        }
+
+        .block:hover ~ .block-icon > .block-select {
+            color: white;
+        }
+
+        .block-icon:hover > .block-select {
+            color: white;
+        }
+
+
+
+        .block-icon:active {
+            background-color: #ff0000;
+        }
+
+
+        .block-icon.active > .block-select {
+            color: white;
+        }
+
+        .block.active > .block-icon-text {
+            color: white;
+        }
+
+        .icon-grouping {
+            display: flex;
+            width: 100%;
+        }
+
+        .auto-select {
+            font-size: 20px;
+        }
+
+        .block-select {
+            font-size: 20px;
+        }
+
+        .feature-help-tab {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .feature-tab {
+            width: 25%;
+            padding: 5px;
+            font-size: 20px;
+            color: #BA0000;
+            border: 3px solid #BA0000;
+            border-right: 1.5px solid #BA0000;
+            border-bottom: none;
+            text-align: center;
+            border-top-left-radius: 10px;
+            cursor: pointer;
+            transition: all .5s ease-out;
+        }
+
+        .feature-tab:hover {
+            background-color: rgb(186, 0, 0, .5);
+            color: white;
+        }
+
+        .feature-tab:active {
+            background-color: #BA0000;
+            color: white;
+        }
+
+        .help-tab {
+            width: 25%;
+            padding: 5px;
+            font-size: 20px;
+            color: #BA0000;
+            border: 3px solid #BA0000;
+            border-left: 1.5px solid #BA0000;
+            border-bottom: none;
+            text-align: center;
+            border-top-right-radius: 10px;
+            cursor: pointer;
+            transition: all .5s ease-out;
+        }
+
+        .help-tab:hover {
+            background-color: rgb(186, 0, 0, .5);
+            color: white;
+        }
+
+        .help-tab:active {
+            background-color: #BA0000;
+            color: white;
+        }
+
+        .holder {
+            width: 25%;
+            border-bottom: 3px solid #BA0000;
+        }
+
+        /* #dedbd6 */
+        .extension-container {
+            background-color: lightgoldenrodyellow;
+            padding-bottom: 5px;
+        }
+
+        .block-icon-text:hover {
+            border-radius: 50px;
+            color: white;
+            background-color: rgb(255, 0, 0, .5);
+        }
+
+        .block-icon-text:active {
+            border-radius: 50px;
+            color: white;
+            background-color: #ff0000;
+        }
+
+        .auto-icon-text {
+            transition: all .2s ease-out;
+        }
+
+        .block-icon-text {
+            transition: all .2s ease-out;
+        }
+
+        .auto-icon-text:hover {
+            background-color: rgb(255, 0, 0, .5);
+            color: white;
+            height: 100%;
+            border-radius: 50px;
+        }
+
+        .auto-icon-text:active {
+            background-color: #ff0000;
+            color: white;
+            border-radius: 50px;
+        }
+
+        .youtube-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: default;
+        }
+
+        .youtube-header-icon {
+            color: #ff0000;
+            margin: 15px;
+            margin-top: 5px;
+            margin-right: 5px;
+            font-size: 40px;
+            cursor: pointer;
+        }
+
+        .youtube-header-icon>a {
+            color: #ff0000;
+        }
+
+        .youtube-header-text {
+            font-family: 'Roboto';
+            font-weight: 700;
+            margin: 15px;
+            margin-top: 5px;
+            margin-left: 5px;
+            font-size: 30px;
+        }
+
+        .header-text-blocker {
+            color: #ff0000;
+        }
+
+        .donate {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .donate > i, .donate > a {
+            padding-top: 10px;
+            margin: .5px;
+        }
+
+        .reverse {
+            display: flex;
+            flex-direction: row-reverse;
+            flex-grow: 1;
+        }
+
+        .forward {
+            display: flex;
+            flex-grow: 1;
+        }
+        
+    </style>
+
+</head>
+
+<body>
+    <div class="extension-container">
+        <div class="modal-header">
+            <h1 class="logo">
+                <img src="images/block.svg" alt="" class="logo-icon">
+                <span>Quick Skip</span>
+            </h1>
+            <div class="youtube-header">
+                <div class="youtube-header-icon">
+                    <a href="https://www.youtube.com/" target="_blank">
+                        <i class="fa fa-youtube"></i>
+                    </a>
+                </div>
+                <div class="youtube-header-text">
+                    <span>Ad<span class="header-text-blocker">Blocker</span></span>
+                </div>
+            </div>
+        </div>
+        <div class="feature-help-section">
+            <div class="feature-help-tab">
+                <div class="holder"></div>
+                <div class="feature-tab">Mode</div>
+                <div class="help-tab">Help</div>
+                <div class="holder"></div>
+            </div>
+            <div class="modal-content">
+                <div class="forward">
+                    <div class="auto">
+                        <i class="auto-icon-text  material-icons">autorenew</i>
+                    </div>
+                    <div class="auto-icon"><span class="auto-select">Auto</span></div>
+                </div>
+                <div class="reverse">
+                    <div class="block">
+                        <i class="block-icon-text material-icons">block</i>
+                    </div>
+                        <div class="block-icon"><span class="block-select">Block</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-icons">
+            <div class="flex">
+                <a href="chrome-extension://hglbjfmifpkgmaoilmbiemjfgimocjme/html/popup.html#" target="_blank">
+                    <i class="fa fa-globe"></i>
+                </a>
+            </div>
+            <div class="flex">
+                <a href="https://www.github.com/NateOsterfeld" target="_blank">
+                    <i class="fa fa-github"></i>
+                </a>
+            </div>
+            <div class="flex">
+                <a href="https://www.linkedin.com/in/nathanielosterfeld/" target="_blank">
+                    <i class="fa fa-linkedin"></i>
+                </a>
+            </div>
+            <div class="flex">
+                <a href="https://www.codepen.io/Nawsterfeld/" target="_blank">
+                    <i class="fa fa-codepen"></i>
+                </a>
+            </div>
+        </div>
+        <div class="donate">
+            <i class="fa fa-paypal"></i>
+            <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=LYS3YBFSVQ5FA&source=url" target="_blank">lease Donate :)</a>
+        </div>
+    </div>
+    <script src="popup.js"></script>
+</body>
+        
+
+</html>
