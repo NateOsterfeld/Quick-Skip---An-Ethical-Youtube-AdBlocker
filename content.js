@@ -36,17 +36,10 @@ const checkSkipBtn = (mode) => {
         mode === 'auto'
             && handleAuto(skipBtn)
         mode === 'block'
-            && handleSuper(skipBtn)
+            && handleBlock(skipBtn)
     }
 }
 
-const handleSuper = (node) => {
-    if (node.container.style.display === 'none') {
-        node.container.setAttribute('style', 'display: ""');
-        node.slot.setAttribute('style', 'display: ""');
-        skipAd(node);
-    }
-}
 
 const skipAd = (node) => {
     if (document.createEvent) {
@@ -59,9 +52,39 @@ const skipAd = (node) => {
         node.container.onclick();
     }
 }
+//.ytp-ad-overlay-image block overlay ads
+const autoCount = () => {
+    chrome.storage.sync.get('autoCount', storage => {
+        if (Object.entries(storage).length === 0) {
+            chrome.storage.sync.set({ 'autoCount': 1 }, () => console.log('autoCount saved: ', 1));
+        } else {
+            chrome.storage.sync.set({ 'autoCount': ++storage.autoCount }, () => console.log('autoCount saved: ', storage.autoCount));
+        }
+    })
+}
 
 const handleAuto = (node) => {
     if (node.container.style.display !== 'none') {
+        autoCount();
+        skipAd(node);
+    }
+}
+
+const blockCount = () => {
+    chrome.storage.sync.get('blockCount', storage => {
+        if (Object.entries(storage).length === 0) {
+            chrome.storage.sync.set({ 'blockCount': 1 }, () => console.log('blockCount saved: ', 1));
+        } else {
+            chrome.storage.sync.set({ 'blockCount': ++storage.blockCount }, () => console.log('blockCount saved: ', storage.blockCount));
+        }
+    })
+}
+
+const handleBlock = (node) => {
+    if (node.container.style.display === 'none') {
+        node.container.setAttribute('style', 'display: ""');
+        node.slot.setAttribute('style', 'display: ""');
+        blockCount();
         skipAd(node);
     }
 }
